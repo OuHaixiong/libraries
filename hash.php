@@ -55,6 +55,13 @@ function validate_password($password, $correct_hash) {
 }
 
 // Compares two strings $a and $b in length-constant time.
+
+/**
+ * 慢比较
+ * @param unknown $a
+ * @param unknown $b
+ * @return boolean
+ */
 function slow_equals($a, $b) {
     $diff = strlen ( $a ) ^ strlen ( $b );
     for($i = 0; $i < strlen ( $a ) && $i < strlen ( $b ); $i ++) {

@@ -22,7 +22,7 @@ class Common_PwdCrypt implements Common_PwdCrypt_Interface
 	}
 	
 	/**
-	 * 解密已加密的字符串，改字符串必须是base64编码
+	 * 解密已加密的字符串，解密字符串必须是base64编码
 	 * @param string $encryptData base64 code
 	 * @param string $key
 	 * @return string
