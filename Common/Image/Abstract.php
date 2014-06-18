@@ -9,7 +9,7 @@
  * @version 2.0.0
  * @created 2012-12-11 20:40
  */
-abstract class Lib_Image_Abstract
+abstract class Common_Image_Abstract
 {
 	/**
 	 * 位置：左上（西北）

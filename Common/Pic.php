@@ -259,25 +259,25 @@ class Common_Pic { //  Pie
 			// 画圆饼
 			$this->draw_sector3d ( $img, $ox, $oy, $a, $b, $v, $sd, $ed, $clrLst [$i] ); // $sd,$ed,$clrLst[$i]);
 			                                                                         
-			// 画标签
-			                                                                         // imagefilledrectangle($img,
-			                                                                         // 5,
-			                                                                         // $ly,
-			                                                                         // 5+$fw,
-			                                                                         // $ly+$fh,
-			                                                                         // $clrLst[$i]);
-			                                                                         // imagerectangle($img,
-			                                                                         // 5,
-			                                                                         // $ly,
-			                                                                         // 5+$fw,
-			                                                                         // $ly+$fh,
-			                                                                         // $clrt);
-			                                                                         // imagestring($img,
-			                                                                         // $font,
-			                                                                         // 5+2*$fw,
-			                                                                         // $ly,
-			                                                                         // $labLst[$i].":".$datLst[$i]."(".(round(10000*($datLst[$i]/$tot))/100)."%)",
-			                                                                         // $clrt);
+            // 画标签
+            // imagefilledrectangle($img,
+            // 5,
+            // $ly,
+            // 5+$fw,
+            // $ly+$fh,
+            // $clrLst[$i]);
+            // imagerectangle($img,
+            // 5,
+            // $ly,
+            // 5+$fw,
+            // $ly+$fh,
+            // $clrt);
+            // imagestring($img,
+            // $font,
+            // 5+2*$fw,
+            // $ly,
+            // $labLst[$i].":".$datLst[$i]."(".(round(10000*($datLst[$i]/$tot))/100)."%)",
+            // $clrt);
 			
 			$str = iconv ( "GB2312", "UTF-8", $labLst [$i] );
 			// @ImageTTFText($img, $font, 0, 5+2*$fw, $ly+13, $clrt,

@@ -1,6 +1,7 @@
 <?php
 
-class Common_Paginator extends Zend_Paginator{
+class Common_Paginator extends Zend_Paginator
+{
 	
 	public $urlvar =array();
 	public $debug;

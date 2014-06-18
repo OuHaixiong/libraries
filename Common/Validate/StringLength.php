@@ -7,7 +7,7 @@
  * @copyright xiqiyanyan.com
  * @created 2011-12-21 10:05
  */
-class Common_Validate_StringLength implements Zend_Validate_Interface
+class Common_Validate_StringLength
 {
 	private $_max;
 	private $_min;
@@ -17,9 +17,9 @@ class Common_Validate_StringLength implements Zend_Validate_Interface
 		$this->_min = $min;
 	}
 	
-	/** (non-PHPdoc)
+	/**
 	 * 验证字符串的长度，一个中文字算一个字，两个英文字母、数字、或其组合算一个字
-	 * @see Zend_Validate_Interface::isValid()
+	 * @param string $value 需要验证的字符串
 	 * @return boolean true:验证通过; false:验证不通过
 	 */
 	public function isValid($value) {

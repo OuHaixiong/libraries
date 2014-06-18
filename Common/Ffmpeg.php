@@ -1,7 +1,7 @@
 <?php
 
 /**
- * 扩展ffmpeg-phhp，对视频、音频进行处理
+ * 扩展ffmpeg-php，对视频、音频进行处理
  * mencode 貌似也是处理视频的
  * @author bear
  * @copyright xiqiyanyan.com
@@ -351,7 +351,7 @@ class Common_Ffmpeg
      
     /**
      * 转化为00：03：56的时间格式
-     * @param integer $second
+     * @param integer $second 总秒数
      * @return string
      */
     public function toHourMinuteSecond($second) {

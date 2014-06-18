@@ -8,7 +8,7 @@
  * @copyright xiqiyanyan.com
  * @created 2011-11-1 14:15
  */
-class Lib_Image extends Lib_Image_Abstract
+class Common_Image extends Common_Image_Abstract
 {
 	/**
 	 * 源图片的部分信息，如：宽、高、类型 ; 
@@ -145,7 +145,7 @@ class Lib_Image extends Lib_Image_Abstract
     }
 
     /**
-     * 载入一张图片
+     * 载入一张图片, 并检测文件类型
      * verification source image is exist and get source image infomation
      * @param string $sourcePath 源图片路径
      * @return boolean
@@ -164,11 +164,19 @@ class Lib_Image extends Lib_Image_Abstract
         	return false;
         }
         $type = strtolower(image_type_to_extension($this->_imageInfo[2]));
+        //$type = mime_content_type($sourcePath); // 获取文件类型(5.3后废弃,不建议使用) image/jpeg
+        
+        // 下面这个也是可以的
+        //$finfo = new finfo(FILEINFO_MIME_TYPE);
+        //$type = $finfo->file($sourcePath); // image/jpeg
+        //$type = strtolower(finfo_file(finfo_open(FILEINFO_MIME_TYPE), $sourcePath)); // image/jpeg
+
         // image_type_to_extension 获取图片的后缀名，包括点在内（注意这里的参数）
         if (!in_array($type, $this->_allowExt)) {
         	$this->_error = '不支持的图片文件格式，只支持' . join('、', $this->_allowExt) . '格式的图片';
         	return false;
         }
+        
     	$this->_sourceType = substr($type, 1);
         $this->_sourcePath = $sourcePath;
         $createFunction = 'imagecreatefrom' . $this->_sourceType;

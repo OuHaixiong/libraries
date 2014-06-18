@@ -8,7 +8,7 @@
  * @version 2.0.0 2012-07-16 14:16
  * @created 2012-06-30 09:49
  */
-class Lib_Imagick extends Lib_Image_Abstract
+class Common_Imagick extends Common_Image_Abstract
 {
 	/**
 	 * 允许的图片类型
