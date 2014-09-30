@@ -306,10 +306,11 @@ class CController extends CBaseController
 		$this->_action=$action;
 		if($this->beforeAction($action))
 		{
-			if($action->runWithParams($this->getActionParams())===false)
+			if($action->runWithParams($this->getActionParams())===false) {
 				$this->invalidActionParams($action);
-			else
+		    } else {
 				$this->afterAction($action);
+			}
 		}
 		$this->_action=$priorAction;
 	}
