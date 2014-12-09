@@ -17,7 +17,7 @@ class Common_Image extends Common_Image_Abstract
 	 * “bits”的值是碰到的最高的位深度
 	 * @var array
 	 */
-	private $_imageInfo;     
+	private $_imageInfo;
 
     /**
      * 允许的图片类型
