@@ -330,7 +330,7 @@ class CDbCommand extends CComponent
 			if($this->_connection->enableProfiling)
 				Yii::beginProfile('system.db.CDbCommand.execute('.$this->getText().$par.')','system.db.CDbCommand.execute');
 
-			$this->prepare();
+			$this->prepare(); // $this->_statement; PDOStatement
 			if($params===array())
 				$this->_statement->execute();
 			else
