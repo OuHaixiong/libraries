@@ -855,7 +855,7 @@ class Common_Tool
     /**
      * 带pre打印变量
      * @param mixed $var 要打印的变量
-     * @param boolean $isExist 是否要退出
+     * @param boolean $isExist 是否要退出 ; 默认true:结束，false：继续执行
      */
     public static function prePrint($var, $isExist = true) {
         echo '<pre>';
