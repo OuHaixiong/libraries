@@ -865,8 +865,30 @@ class Common_Tool
             exit();
         }
     } 
-   
-    
+
+    /**
+     * 写入一段字符串进一个文件（如果文件[或文件夹]不存在，则会自动创建）
+     * 该函数依赖 createdDirectory() 函数
+     * @param string $filePath 要写入的文件路径
+     * @param string $string 要写入的字符串
+     * @return boolean true：写入成功；false：写入失败
+     */
+    public static function writeStringToFile($filePath, $string) {
+        $dir = pathinfo($filePath, PATHINFO_DIRNAME);
+        $boolean = self::createdDirectory($dir);
+        if ($boolean) {
+            $boolean = file_put_contents($filePath, $string);
+            if ($boolean === false) {
+                self::$_error = '写入失败！';
+                return false;
+            } else {
+                return true;
+            }
+        } else {
+            self::$_error = '创建目录权限不足';
+            return false;
+        }
+    }
     	
 
 	
