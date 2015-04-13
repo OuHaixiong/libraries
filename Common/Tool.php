@@ -4,7 +4,7 @@
  * @desc 一些公共的自定义函数，工具类；包括删除文件夹、验证是否是邮件、验证是否是ip地址、验证是否为网址、获取网页内容、生成随机字符串等
  * @author bear
  * @version 1.0.3 2011-10-24 17:07
- * @copyright xiqiyanyan.com
+ * @copyright http://maimengmei.com
  * @created 2011-10-11 16:15
  */
 class Common_Tool
