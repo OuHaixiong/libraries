@@ -2,8 +2,8 @@
 
 /**
  * @desc 一些公共的自定义函数，工具类；包括删除文件夹、验证是否是邮件、验证是否是ip地址、验证是否为网址、获取网页内容、生成随机字符串等
- * @author bear
- * @version 1.0.3 2011-10-24 17:07
+ * @author Bear
+ * @version 1.1.0 2015-4-14 17:07
  * @copyright http://maimengmei.com
  * @created 2011-10-11 16:15
  */
@@ -189,11 +189,12 @@ class Common_Tool
 
 	/**
 	 * 检查变量存在并赋值（不能为空）。 注意 0 是为空的
+	 * 实用性不强
 	 * @param mixed $variable
 	 * @return boolean
 	 */
 	public static function checkVariableIssetAndNotEnpty($variable) {
-		if (isset($variable) && !empty($variable)) {
+		if (isset($variable) && (!empty($variable))) {
 			return true;
 		} else {
 			return false;
