@@ -865,10 +865,28 @@ class Common_Tool
         if ($isExist) {
             exit();
         }
-    } 
-   
-    
-    	
+    }
+
+    /**
+     * 获取浏览器语言
+     * @param array $availableLanguages 您网站支持的语言；如：array('cn', 'en', 'zh-cn', 'zh')
+     * @param string $default 默认语言
+     * @return string
+     */
+    public static function getClientLanguage(array $availableLanguages, $default = 'cn') {
+        if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
+            $languages = explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
+            foreach ($languages as $value) {
+                $choice = substr($value, 0, 2);
+                if (in_array($choice, $availableLanguages)) {
+                    return $choice;
+                }
+            }
+            
+        }
+        return $default;
+    }
+
 
 	
 
