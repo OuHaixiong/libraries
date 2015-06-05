@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Http请求
+ * 通过curl发送Http请求
  * @author Bear
  * @version 1.0
  * @copyright http://maimengmei.com
@@ -22,8 +22,7 @@ class Common_HttpClient
      * @param string $contentType     application/x-www-form-urlencoded     multipart/form-data    application/json
      * @return boolean | mixed
      */
-    public function sendRequest($url, $data = null, $method = 'GET', $timeout = 30, $refererUrl = '', $proxy = false)
-    {
+    public function sendRequest($url, $data = null, $method = 'GET', $httpHeader = array(), $cookie = array(), $refererUrl = '', $proxy = false, $timeout = 30) {
         $method = strtoupper($method);
         if (!in_array($method, array('GET', 'POST'))) {
         	return false;
@@ -41,6 +40,22 @@ class Common_HttpClient
         curl_setopt($ch, CURLOPT_HEADER, 0);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
+        if (!empty($httpHeader)) { // 请求头信息
+            $headerData = array();
+            foreach ($httpHeader as $k=>$v) {
+                $headerData[] = $k . ':' . $v;
+            }
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headerData);
+//            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+        }
+        if (!empty($cookie)) { // 请求cookie值
+            $cookieData = array();
+            foreach ($cookie as $k=>$v) {
+                $cookieData[] = $k . '=' . $v;
+            }
+            $cookieData = implode(';', $cookieData);
+            curl_setopt($ch, CURLOPT_COOKIE, $cookieData);
+        }
         if ('POST' === $method) {
             curl_setopt($ch, CURLOPT_POST, 1); // curl_setopt($ch, CURLOPT_POST, true);
             curl_setopt($ch, CURLOPT_FRESH_CONNECT, 1);
@@ -58,7 +73,6 @@ class Common_HttpClient
         if ($refererUrl) {
             curl_setopt($ch, CURLOPT_REFERER, $refererUrl);
         }
-//         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
         if ($proxy) {
             curl_setopt($ch, CURLOPT_PROXY, $proxy);
         }
