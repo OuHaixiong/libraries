@@ -411,7 +411,7 @@ class Common_Tool
 	 * 显示客户端ip地址函数
 	 * @return string
 	 */
-	public static function clientRealIp() {
+	public static function getClientRealIp() {
 		if (isset($_SERVER))
 		{
 			if (isset($_SERVER["HTTP_X_FORWARDED_FOR"]))
@@ -471,7 +471,7 @@ class Common_Tool
 	}
 	
 	/**
-	 * 获取当前的网址（get the current url）; base URL
+	 * 获取当前的网址（get the current url）; 完整的url路径：包括域名和参数。base URL
 	 * @return string
 	 */
 	public static function getCurrentUrl() {
