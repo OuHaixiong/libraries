@@ -887,7 +887,42 @@ class Common_Tool
         return $default;
     }
 
+    /**
+     * 将一个字符串写入文件
+     * @param string $filePath 完整的文件绝对路径，包括文件名
+     * @param string $string 需要写入的字符串
+     * @param boolean $isAppend 是否追加的方式写入文件; 默认：false：不追加， true：追加
+     * @return boolean true:写入成功; false:写入失败，有错误提示
+     */
+    public static function writeFileFromString($filePath, $string, $isAppend = false) {
+        $dirname = dirname($filePath);
+        if (!file_exists($dirname)) {
+            $boolean = @mkdir($dirname, 0777, true);
+            if (!$boolean) {
+                self::setError('目录：' . $dirname . '没有写的权限');
+                return false;
+            }
+        }
 
+        // 已经存在，判断是否可写
+        if (is_file($filePath)) {
+            if (!is_writable($filePath)) {
+                self::setError('文件：' . $filePath . '已存在且不可写');
+                return false;
+            }
+        }
+        if ($isAppend) {
+            $numberByte = file_put_contents($filePath, $string, FILE_APPEND);
+        } else {
+            $numberByte = file_put_contents($filePath, $string);
+        }
+        if ($numberByte === false) {
+            self::setError('写入错误');
+            return false;
+        } else {
+            return true;
+        }
+    }
 	
 
 
