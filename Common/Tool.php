@@ -408,35 +408,33 @@ class Common_Tool
 	}
 	
 	/**
-	 * 显示客户端ip地址函数
+	 * 获取客户端ip地址函数
 	 * @return string
 	 */
 	public static function getClientRealIp() {
-		if (isset($_SERVER))
-		{
-			if (isset($_SERVER["HTTP_X_FORWARDED_FOR"]))
-			{
+		if (isset($_SERVER)) {
+			if (isset($_SERVER["HTTP_X_FORWARDED_FOR"])) {
 				$arr = explode(',', $_SERVER["HTTP_X_FORWARDED_FOR"]);/* 取X-Forwarded-For中第一个非unknown的有效IP字符串 */
 				foreach ($arr AS $ip)
 				{
 					$ip = trim($ip);
-					if ($ip != 'unknown')
-					{$realip = $ip;break;}
+					if ($ip != 'unknown') {
+					    $realip = $ip;break;
+					}
 				}
+			} elseif (isset($_SERVER["HTTP_CLIENT_IP"])) {
+			    $realip = $_SERVER["HTTP_CLIENT_IP"];
+			} else {
+			    $realip = $_SERVER["REMOTE_ADDR"];
 			}
-			elseif (isset($_SERVER["HTTP_CLIENT_IP"]))
-			{$realip = $_SERVER["HTTP_CLIENT_IP"];}
-			else
-			{$realip = $_SERVER["REMOTE_ADDR"];}
-		}
-		else
-		{
-			if (getenv('HTTP_X_FORWARDED_FOR'))
-			{$realip = getenv('HTTP_X_FORWARDED_FOR');}
-			elseif (getenv('HTTP_CLIENT_IP'))
-			{$realip = getenv('HTTP_CLIENT_IP');}
-			else
-			{$realip = getenv('REMOTE_ADDR');}
+		} else {
+			if (getenv('HTTP_X_FORWARDED_FOR')) {
+			    $realip = getenv('HTTP_X_FORWARDED_FOR');
+			} elseif (getenv('HTTP_CLIENT_IP')) {
+			    $realip = getenv('HTTP_CLIENT_IP');
+			} else {
+			    $realip = getenv('REMOTE_ADDR');
+			}
 		}
 		return $realip;
 	}
@@ -445,7 +443,7 @@ class Common_Tool
 	 * 获取客户端(访问者)的IP（get the ip address）
 	 * @return string | unknown 成功返回客户端的ip，失败返回 unknown
 	 */
-	public static function getIP() { // var_dump(getenv("HTTP_CLIENT_IP"));exit;
+	public static function getIp() { // var_dump(getenv("HTTP_CLIENT_IP"));exit;
 		//getenv($varname); 获取一个环境变量的值;如获取返回该变量值，否则返回 false。 如：$ip = getenv('REMOTE_ADDR');var_dump($ip); 获取ip
 		if (getenv('HTTP_CLIENT_IP') && strcasecmp(getenv('HTTP_CLIENT_IP'), 'unknown')) {
 			$ip = getenv('HTTP_CLIENT_IP');
