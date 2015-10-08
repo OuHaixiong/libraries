@@ -228,7 +228,7 @@ abstract class Common_Image_Abstract
 	
 	/**
 	 * 获取源图片类型
-	 * @return string
+	 * @return string 源图片类型，值如： gif,jpg,jpeg,png (不包括点在内)
 	 */
     public function getSourceType() {
 		return $this->_sourceType;
@@ -445,8 +445,8 @@ abstract class Common_Image_Abstract
         foreach ($createdPath as $path) {
         	if (is_writeable($directoryPath)) {
         		$directoryPath .= '/' . $path;
-        		mkdir($directoryPath);
-//         		mkdir($directoryPath, 0777, true); // 安全模式下有问题
+//         		mkdir($directoryPath);
+        		mkdir($directoryPath, 0777, true); // 安全模式下有问题, 最后的参数，如果为true，则可以递归创建不存在的目录
 //         		chmod($directoryPath, 0777);
         	} else {
         		$this->_error = "无法新建目标文件夹（目录）；请确认目标文件夹路径是否正确或目标文件夹 $directoryPath 是否有写的权限！";

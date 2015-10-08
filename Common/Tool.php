@@ -712,7 +712,7 @@ class Common_Tool
 	 * @param integer $length 需要的字符串长度
 	 * @return string
 	 */
-	public static function random($length) {
+	public static function random($length = 6) {
 		$hash = '';
 		$chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz';
 		mt_srand((double)microtime()*1000000); // 播下一个更好的随机数发生器种子
