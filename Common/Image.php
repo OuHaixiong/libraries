@@ -198,18 +198,18 @@ class Common_Image extends Common_Image_Abstract
     }
 
     /**
-     * 等比例生成缩略图(bind thumbnail image ; 不支持gif动画，能生成jpg、gif、png格式的缩略图，如果gif动画不需要动画的话，也可以生成)
+     * 等比例生成缩略图(bind thumbnail image 压缩图片; 不支持gif动画，能生成jpg、gif、png格式的缩略图，如果gif动画不需要动画的话，也可以生成)
      * 如果源图片的宽和高都小于给定缩略图的宽和高就不进行缩率
      * 这里保持了源图像的比例，如果需要截取图片并生成缩略图请调用 resize方法
      * 最好生成的是 jpg 图片，这样图片会小很多
-     * 呵呵，这个函数还可以用来当上传图片使用
+     * 呵呵，这个函数还可以用来当上传图片使用(如果宽和高都不传，将保持源图片的宽和高)
+     * 如果 $bestfit 为true，宽、高都不会超过给定到值，如果为false，就是固定给定的值
+     * 如果只传入来宽或高的一个（另一个传null或0），就会按照宽或高等比例缩放
+     * @param integer $width 缩略图的宽(目标宽)
+     * @param integer $height 缩略图的高 （目标高. 如果想只按宽或高进行缩放时，宽或高可以只传一个，另一个设为0或null）
+     * @param boolean $bestfit 是否变形压缩，默认true：不变形，false：变形
+     * @return boolean 如果成功返回true，如果失败返回false，会有错误提示信息
      * @see Lib_Image_Abstract::thumbnail
-     * @param integer $width 缩略图的宽
-     * @param integer $height 缩略图的高 （如果想只按宽或高进行缩放时，宽或高可以只传一个，另一个设为0或null）
-     * @param string $type 指定生成图片的类型，默认jpg，如果保持源图片类型传入null
-     * @param integer $quality 生成缩略图的质量，取值范围是 0(最差)-100（最好）;仅对jpg有效
-     * @param boolean $flag 是否删除源图片，默认false:不删除， true:删除
-     * @return false | string 如果成功返回完整的文件名，如果失败返回false，会有错误提示信息
      */
     public function thumbnail($width = null, $height = null, $bestfit = true) {
         // $_FILES['inputFileName']['type'] => 'image/jpeg'、'image/pjpeg'、'image/png'、'image/x-png'、'image/gif'、、、、
