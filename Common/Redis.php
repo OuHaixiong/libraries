@@ -30,6 +30,9 @@ class Common_Redis extends Redis
     	} else {
     	    $this->connect($config['host'], $config['port'], $config['timeout']);
     	}
+    	if (isset($config['password'])) {
+    	    $this->auth($config['password']);
+    	}
     	if (!empty($db)) {
     	    $this->select($db);
     	}
