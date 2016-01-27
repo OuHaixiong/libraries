@@ -5,7 +5,7 @@
  * 这里和任何框架都无关
  * @author bear
  * @version 2.0.1 2015-12-14 10:27 
- * @copyright xiqiyanyan.com
+ * @copyright http://maimengmei.com
  * @created 2011-10-27 14:33
  */
 class Common_Ajax

@@ -3,7 +3,7 @@
  * @desc 用于生成加密密码和验证密码
  * @author Bear
  * @version 1.1.0 2012-01-10 15:21
- * @copyright 2011 xiqiyanyan.com
+ * @copyright 2011 http://maimengmei.com
  * @created 2011-7-14 上午10:32:30
  */
 class Common_PwdCrypt implements Common_PwdCrypt_Interface

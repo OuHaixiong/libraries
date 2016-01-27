@@ -3,7 +3,7 @@
  * 加密、验证密码
  * @author bear
  * @version 1.0.0 2011-7-15
- * @copyright xiqiyanyan.com
+ * @copyright http://maimengmei.com
  */
 interface Common_PwdCrypt_Interface
 {

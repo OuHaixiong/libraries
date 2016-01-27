@@ -4,7 +4,7 @@
  * @desc 翻译类 
  * @author Bear
  * @version 1.0.0 
- * @copyright xiqiyanyan.com
+ * @copyright http://maimengmei.com
  * @created 2012-12-05 11:58
  */
 class Common_Translate

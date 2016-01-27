@@ -5,7 +5,7 @@
  * (抽象类中的方法：如果是抽象方法的话，可以不用实现；如果子类继承了抽象类，那么一定要实现抽象方法)
  * 尽量使抽象方法中的参数及参数值和继承其抽象类的实现方法一致
  * @author bear
- * @copyright xiqiyanyan.com
+ * @copyright http://maimengmei.com
  * @version 2.0.0
  * @created 2012-12-11 20:40
  */

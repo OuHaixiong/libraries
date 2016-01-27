@@ -236,7 +236,7 @@ class Common_Tool
 	 * @param string $host 传进来的网页主机头； 暂时后面一定要带/
 	 * 暂时没有返回值
 	 */
-	public static function getAllImages($text, $folderPath, $host = 'http://www.xiqiyanyan.com/') {
+	public static function getAllImages($text, $folderPath, $host = 'http://www.http://maimengmei.com/') {
 		$imgPattern = '/<img [^<>]*?src\s*\=\s*[\'|\"]([^<>\'\"]+?\.(jpg|jpeg|gif|png))[\'|\"][^>]*>/i';
 		// 这里先这样写着，暂时能用，等遇到不能用时再改
 		// $imgPattern = '/<img [^>]*src\s*\=\s*[\"\']?\s*([^>\"\'\s]*)\.(jpg|jpeg|gif|png)[\"\'][^>]*\/?这里无空格>/i';  // 这个也是可以的

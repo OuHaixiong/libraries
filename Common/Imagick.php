@@ -4,7 +4,7 @@
  * @desc 对Linux的ImageMagick进行扩展，对图片进行处理 (需要Linux安装ImageMagick)
  * http://www.1024i.com  学习网站
  * @author Bear
- * @copyright xiqiyanyan.com
+ * @copyright http://maimengmei.com
  * @version 2.0.0 2012-07-16 14:16
  * @created 2012-06-30 09:49
  */
@@ -281,7 +281,7 @@ class Common_Imagick extends Common_Image_Abstract
         // 还有下面的方法：
         // $draw->setGravity(Imagick::GRAVITY_SOUTHEAST); //设置水印位置
         // (特别注意了，原生态的打水印的位置很好用哦)
-        // $draw->annotation(0, 0, 'xiqiyanyan.com');
+        // $draw->annotation(0, 0, 'http://maimengmei.com');
         // $canvas->drawImage($draw);
     }   
     

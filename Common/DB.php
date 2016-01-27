@@ -5,7 +5,7 @@
  * // TODO 多主键的考虑
  * @author bear
  * @version 1.0.0
- * @copyright xiqiyanyan.com
+ * @copyright http://maimengmei.com
  * @created 2012-2-15 10:59 
  * @example  $db = Common_DB::getInstance(); $sql = 'select * from News order by AddTime desc'; $number = $db->fetchNum($sql);
  */

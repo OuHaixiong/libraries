@@ -4,7 +4,7 @@
  * @desc 公共字符串处理类
  * @author bear
  * @version 1.1.1 2012-03-05 14:23
- * @copyright xiqiyanyan.com
+ * @copyright http://maimengmei.com
  * @created 2012-2-10 10:55
  * mb_strimwidth 这个php的函数也有点点像 mb_strcut
  */

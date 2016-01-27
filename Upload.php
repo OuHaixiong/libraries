@@ -3,7 +3,7 @@
 /**
  * @desc 文件、图片上传类
  * @author bear
- * @copyright xiqiyanyan.com
+ * @copyright http://maimengmei.com
  * @version 1.0.0 2011-12-15 10:32
  * @created 2011-9-5
  */

@@ -4,7 +4,7 @@
  * 扩展ffmpeg-php，对视频、音频进行处理
  * mencode 貌似也是处理视频的
  * @author bear
- * @copyright xiqiyanyan.com
+ * @copyright http://maimengmei.com
  * @version 1.0.0
  * @created 2013-03-04 09:04
  * 

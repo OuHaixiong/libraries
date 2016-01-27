@@ -4,7 +4,7 @@
  * @desc 获取系统配置信息类;如操作系统等
  * @author bear
  * @version 1.0.0 2012-08-25 10:51
- * @copyright xiqiyanyan.com
+ * @copyright http://maimengmei.com
  * @created 2012-08-25 10:51
  */
 class Common_SysInfo {

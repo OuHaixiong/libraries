@@ -4,7 +4,7 @@
  * 验证字符串长度
  * @author bear
  * @version 1.0.0
- * @copyright xiqiyanyan.com
+ * @copyright http://maimengmei.com
  * @created 2011-12-21 10:05
  */
 class Common_Validate_StringLength

@@ -4,7 +4,7 @@
  * @desc 文件、图片上传类 (单个文件上传类，多个请用循环)
  * 暂时不考虑多文件上传(max files)
  * @author bear
- * @copyright xiqiyanyan.com
+ * @copyright http://maimengmei.com
  * @version 1.1.0 2012-07-27 10:32
  * @created 2011-9-5
  */

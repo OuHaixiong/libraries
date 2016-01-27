@@ -5,7 +5,7 @@
  * 这里主要用 GD 库来操作，目前只支持 .jpg, .png, .gif 格式的图片(不支持gif动画)
  * @author Bear
  * @version 2.0.0 2012-12-25 16:36
- * @copyright xiqiyanyan.com
+ * @copyright http://maimengmei.com
  * @created 2011-11-1 14:15
  */
 class Common_Image extends Common_Image_Abstract

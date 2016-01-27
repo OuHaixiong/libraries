@@ -4,7 +4,7 @@
  * 获取客户端信息；如操作系统、浏览器、IP地址	
  * @author bear
  * @version 1.0.0
- * @copyright xiqiyanyan.com
+ * @copyright http://maimengmei.com
  * @created 2013-1-9 17:58
  */
 class Common_ClientInfo

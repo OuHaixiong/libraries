@@ -3,7 +3,7 @@
 /**
  * @desc 一些排序算法
  * @author Bear
- * @copyright xiqiyanyan.com
+ * @copyright http://maimengmei.com
  * @version 1.0.0 2012-06-26 14：03
  * @created 2011-9-22 15:53
  */
