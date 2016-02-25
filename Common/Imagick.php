@@ -110,6 +110,7 @@ class Common_Imagick extends Common_Image_Abstract
             $this->_sourceWidth = (int) $widthAndHeight['width'];
             $this->_sourceHeight = (int) $widthAndHeight['height'];
             $this->_sourcePath = $sourcePath;
+            return true;
     	} catch (Exception $e) {
             $this->_error = '读取图片文件出错，不支持的图片文件格式';
             $this->_im = null;
