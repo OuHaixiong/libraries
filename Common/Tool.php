@@ -922,8 +922,54 @@ class Common_Tool
         }
     }
 	
-
-
+    /**
+     * 组合数公式实现;即从$total个数中提取$number个数的组合有多少种
+     * C($total, $number) = $total!/($number!*($total-$number)!); !表示阶乘 
+     * @param integer $total 总个数
+     * @param integer $number 提取多少个数(此数一定不能大于总个数且一定要大于1)
+     * @return integer 返回组合的种类数（有多少组组合）
+     */
+    public static function getCombinatorialNumber($total, $number) {
+        if (($number > $total) || ($number < 1)) {
+            return 0;
+        }
+        if ($number == $total) {
+            return 1;
+        }
+        
+        return self::getFactorial($total)/(self::getFactorial($number)*(self::getFactorial($total - $number)));
+    }
+    
+    /**
+     * 获取一个数的阶乘（如5的阶乘是：5*4*3*2*1）
+     * @param integer $number 传入的整数，必须大于0
+     * @return integer
+     */
+    public static function getFactorial($number) {
+        if ($number > 1) {
+            $sum = $number*self::getFactorial($number-1);
+        } else {
+            $sum = $number;
+        }
+        return $sum;
+    }
+    
+    /**
+     * 获取N个数的全组合数；即
+     * @param unknown $number
+     * 
+     */
+    public static function getFullCombinatorial($number) {
+        if ($number < 2) {
+            return 0;
+        }
+        $sum = 0;
+        $i = $number;
+        for (; $i > 1; $i--) {
+            $sum += self::getCombinatorialNumber($number, $i);
+        }
+        return $sum;
+    }
 
 
 }
