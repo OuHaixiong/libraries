@@ -6,6 +6,8 @@
  * @version 1.1.0 2015-4-14 17:07
  * @copyright http://maimengmei.com
  * @created 2011-10-11 16:15
+ * TODO 下面正则匹配所有的img标签的都需要修改，需要支持如：<img src="http://cdn2.bigcommerce.com/server2600/4r4weyxd/product_images/uploaded_images/stem-header-01.gif?t=1445408831" style="margin: 0px; padding: 0px; outline: none; max-width: 100%;">
+ * https://img.alicdn.com/tps/TB1A5jbMVXXXXboXFXXXXXXXXXX-476-260.jpg_240x5000q100.jpg
  */
 class Common_Tool
 {
@@ -971,5 +973,33 @@ class Common_Tool
         return $sum;
     }
 
+    /**
+     * 把一个字符串追加写入文件
+     * 如果该文件不存在则自动创建
+     * @param string $filePath 要写入的文件路径（绝对路径）
+     * @param string $string 写入的字符串
+     * @return boolean 成功返回true，失败返回false
+     */
+    private function _appendWriteFile($filePath, $string) {
+        if (!is_file($filePath)) {
+            $dirname = dirname($filePath);
+            if (!file_exists($dirname)) {
+                $boolean = mkdir($dirname, 0777, true);
+                if ($boolean == false) {
+                    return false;
+                }
+            }
+            // TODO 文件夹没有写的权限
+        } else {
+            if (!is_writeable($filePath)) {
+                self::$_error = '文件没有写的权限';
+                return false;
+            }
+        }
+        $handle = fopen($filePath, 'a');
+        $length = fwrite($handle, $string . "\n");
+        fclose($handle);
+        return true;
+    }
 
 }
