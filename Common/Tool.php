@@ -6,8 +6,6 @@
  * @version 1.1.0 2015-4-14 17:07
  * @copyright http://maimengmei.com
  * @created 2011-10-11 16:15
- * TODO 下面正则匹配所有的img标签的都需要修改，需要支持如：<img src="http://cdn2.bigcommerce.com/server2600/4r4weyxd/product_images/uploaded_images/stem-header-01.gif?t=1445408831" style="margin: 0px; padding: 0px; outline: none; max-width: 100%;">
- * https://img.alicdn.com/tps/TB1A5jbMVXXXXboXFXXXXXXXXXX-476-260.jpg_240x5000q100.jpg
  */
 class Common_Tool
 {
@@ -77,23 +75,6 @@ class Common_Tool
 		$ctx = stream_context_create(array('http'=>array('timeout'=>$timeout)));
 		return file_get_contents($url, 0, $ctx);
 	}
-
-	//替换页面上所有图片的src为本地图片（未测试，不能用）
-	function ReplaceImageSrc($text){
-		$Pattern = array(
-			'/<img[^<>]*? src="http:\/\/.*\/(.*?\.(jpg|gif))"[^<>]*?>/i',
-			'/<img src="http:\/\/.*\/(.*?\.(jpg|gif)) "[^<>]*?\/>/i',
-			'/<img[^<>]*?src=http:\/\/[^<>]*?\/([^<>\/]*?\.(jpg|gif))[^<>]*?>/i'
-		);
-		$Replace = array(
-			'<img src="download/xmls/news/$1"'.' />',
-			'<img src="download/xmls/news/$1"'.' />',
-			'<img src="download/xmls/news/$1"'.' />',
-		);
-		
-		return preg_replace($Pattern, $Replace, $text);
-	}
-	
 
 	/**
 	 * 删除文件夹；递归删除给定路径（目录）的所有文件和文件夹 （这个是垃圾不能使用）
@@ -238,19 +219,15 @@ class Common_Tool
 	 * @param string $host 传进来的网页主机头； 暂时后面一定要带/
 	 * 暂时没有返回值
 	 */
-	public static function getAllImages($text, $folderPath, $host = 'http://www.http://maimengmei.com/') {
-		$imgPattern = '/<img [^<>]*?src\s*\=\s*[\'|\"]([^<>\'\"]+?\.(jpg|jpeg|gif|png))[\'|\"][^>]*>/i';
-		// 这里先这样写着，暂时能用，等遇到不能用时再改
-		// $imgPattern = '/<img [^>]*src\s*\=\s*[\"\']?\s*([^>\"\'\s]*)\.(jpg|jpeg|gif|png)[\"\'][^>]*\/?这里无空格>/i';  // 这个也是可以的
-		preg_match_all($imgPattern, $text, $imgMatches); 
-// 		print_r($imgMatches);exit;
-		$pattern = '/<img [^<>]*?src\s*\=\s*[\'\"](http:\/\/[^<>]*?\/[^<>]*?\.(jpg|jpeg|gif|png))[\'\"][^<>]*?>/i'; // 第一中情况就把有http的包含进去来，所以这里没有必要了
-		preg_match_all($pattern, $text, $matches); 
-// 		print_r($matches);exit;
-		$imgUrlList = array_merge($imgMatches[1],$matches[1]); // print_r($imgUrlList);exit;
+	public static function getAllImages($text, $folderPath, $host = 'http://www.maimengmei.com/') {
+		$imgPattern = '/<img [^<>]*src\s*=\s*[\'\"]([^\'\"]+)[\'\"][^>]*>/is'; // 包括了本地的（不带http的）、远程的（包括http和https）和动态生成的图片路径
+		preg_match_all($imgPattern, $text, $imgMatches);
+		$imgUrlList = $imgMatches[1];
 		foreach ($imgUrlList as $imgUrl) {
-			$boolean = strpos($imgUrl, $host);
-			if ($boolean === false) {
+		    $imgUrl = trim($imgUrl);
+		    $httpPattern = '/^http(s)?\:\/\//';
+			$boolean = preg_match($httpPattern, $imgUrl);
+			if ($boolean == false) {
 				if (substr($imgUrl, 0, 1) == '/') {
 					$imgUrl = substr($imgUrl, 1);
 				}
@@ -330,9 +307,9 @@ class Common_Tool
 	 * @return string
 	 */
 	public static function clearImageAndObject($content) {
-		$imgPattern = '/<img.*?>/is';//去除image
+		$imgPattern = '/<img[^>]*?>/is';//去除image
 		$content = preg_replace($imgPattern, '', $content);
-		$objectPattern = '/<object.*?>(.*?<\/object>)?/is';//去除object：视频，音频，flash等
+		$objectPattern = '/<object[^>]*?>([^<]*?<\/object>)?/is';//去除object：视频，音频，flash等
 		$content = preg_replace($objectPattern, '', $content);
 		return $content;
 	}
@@ -676,23 +653,22 @@ class Common_Tool
 	
 	/**
 	 * 将Http下的图片文件下载到本地，并返回之
-	 * @param array $arrayHttpImg 含有 http路径的数组
+	 * @param array $arrayHttpImg 含有 http(s)路径的数组
 	 * @param string $folderPath  保存到哪里（文件夹路径）; 注意了，可以是相对路径或绝对路径，不能是 '/upload'这样的
-	 * @return array | false 不是数组或数组为空时返回false， 如果保存不成功，返回null
+	 * @return array | false 不是数组或数组为空时返回false， 如果保存不成功，数组单个的值返回null
 	 */
 	public static function httpImg2LocalFolder($arrayHttpImg, $folderPath) {
 		if (is_array($arrayHttpImg) and sizeof($arrayHttpImg)) { // sizeof() 是 count() 的别名
 			foreach ($arrayHttpImg as $key=>$value) {
-				preg_match_all('/(http:\/\/(?!.*http.*)[^<]*\.(jpg|gif|jpeg|png|bmp))/iU', $value, $matches);
-//				print_r($matches);
-				if (sizeof($matches[0])) {
-					$httpImgPath = $matches[0][0];
-					$imgData = file_get_contents($httpImgPath);
+			    $value = trim($value);
+				$boolean = preg_match('/^http(s)?:\/\//iU', $value);
+				if ($boolean) {
+					$imgData = @file_get_contents($value); // TODO 对性能有要求时，使用curl替代
 //					$folderPath = realpath($folderPath); // realpath() 返回规范化的绝对路径名 ;如果无法找到（返回），则返回false；成功返回绝对路径 。  此处无法用
 //					$folderPath = preg_replace('/\\\/', '/', $folderPath);  // 注意这里的写法
 					$folderPath = str_replace('\\', '/', $folderPath);
 					$folderPath = substr($folderPath, -1) == '/' ? $folderPath : $folderPath . '/';
-					$imgPathInfo = pathinfo($httpImgPath);
+					$imgPathInfo = pathinfo($value);
 					$savePath = $folderPath . md5(microtime(true)) . mt_rand() . '.' . $imgPathInfo['extension'];
 					if (@file_put_contents($savePath, $imgData)) {
 						$arrayHttpImg[$key] = $savePath;
