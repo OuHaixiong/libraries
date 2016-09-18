@@ -23,10 +23,11 @@ class Common_Ajax
 	 * @param object | array | string $data
 	 * @param integer $status 状态，默认1：获取数据成功（操作成功），0：未知错误， -99：未登录
 	 * @param object | array | string $data
-	 * @param string $type TODO jsonp
+	 * @param string $type 返回数据类型，默认json，可选text，jsonp
+	 * @param string $callback jsonp回调函数名（如果type是jsonp，此参数不可缺）
 	 * @return string | object  string JSON encoded object
 	 */
-	public static function output($message = null, $status = 1, $data = null, $type = 'json') {
+	public static function output($message = null, $status = 1, $data = null, $type = 'json', $callback = '') {
 	    $response = array();
 		$response['status'] = $status;
 		if ($message !== null) {
@@ -39,6 +40,8 @@ class Common_Ajax
 			echo $data;
 		} else if ($type == 'json'){ // CJSON::encode( $json ); 
 			echo json_encode($response);
+		} else if ($type == 'jsonp') {
+		    echo $callback . '(' . json_encode($response) . ')';
 		}
         exit();
     }
