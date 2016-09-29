@@ -977,5 +977,35 @@ class Common_Tool
         fclose($handle);
         return true;
     }
+    
+    /**
+     * 注意：此函数不能用
+     * 获取网页的keywords
+     * @param string $url 需要查找的网页url地址
+     * @return array
+     */
+    public static function getWebKeywords($url) {
+        $meta = get_meta_tags($url); // 经测试，这个函数并不能通过url获取meta值，不知道是否和环境有关
+        if (isset($meta['keywords'])) {
+            $keywords = explode(',', $meta['keywords']); // Split keywords
+            $keywords = array_map('trim', $keywords); // Trim them
+            $keywords = array_filter($keywords); // Remove empty values
+            return $keywords;
+        } else {
+            return array();
+        }
+    }
+    
+    /**
+     * 创建数据url
+     * @param string $filePath 数据文件
+     * @param string $mime 数据类型，如：:image/png，image/jpeg
+     * @return string
+     */
+    public static function dataUri($filePath, $mime) {
+        $contents = file_get_contents($filePath);
+        $base64Data = base64_encode($contents);
+        return "data:$mime;base64,$base64Data";
+    }
 
 }
