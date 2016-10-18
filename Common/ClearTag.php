@@ -81,7 +81,7 @@ class Common_ClearTag
 		$content = preg_replace($objectPattern, '', $content);
 		return $content;
 	}
-	
+
 	/**
 	 * 去掉指定的html标签(没有来得及测试)
 	 * @param array $tags
@@ -94,8 +94,19 @@ class Common_ClearTag
 		}
 		return preg_replace($p, '', $str);
 	}
-	
-	
+
+    /**
+     * 删除所有Microsoft Word创建的Tag，比如font，span，style，class等(对换行不知道是否支持)
+     * Removes all FONT and SPAN tags, and all Class and Style attributes.
+     * @param string $str
+     * @return string
+     */
+    public static function clearWordHtml($str) {
+        $str = preg_replace('/<\/?(font|span|del|ins)[^>]*>/i', '', $str); // 删除font、span、del、ins标签
+        $str = preg_replace('/<([^>]*)(class|lang|style|size|face)=("[^"]*"|\'[^\']*\'|[^>]+)([^>]*)>/', '<\1>', $str);
+        $str = preg_replace('/<([^>]*)(class|lang|style|size|face)=("[^"]*"|\'[^\']*\'|[^>]+)([^>]*)>/', '<\1>', $str); // 两次是为了有两个属性的元素
+        return $str;
+    }
 	
 	
 }

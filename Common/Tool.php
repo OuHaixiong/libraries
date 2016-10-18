@@ -77,21 +77,21 @@ class Common_Tool
 	}
 
 	/**
-	 * 删除文件夹；递归删除给定路径（目录）的所有文件和文件夹 （这个是垃圾不能使用）
+	 * 删除文件夹；递归删除给定路径（目录）的所有文件和文件夹 （这个是垃圾不能使用，后来修改了，也可以用了）
 	 * @param  string $dir 需要删除的目录路径（最后带 / 和不带都是一样的）
 	 * @return boolean flase：不是文件夹 ；true：删除成功
 	 */
-	public static function delDir($dir) { // 不要使用这个，使用下面那个
+	public static function delDir($dir) { // 不要使用这个，使用下面那个.后来修改了，也可以用了
 		if (!is_dir($dir)) return false;
+		$dir = realpath($dir);
 		$dh = opendir($dir);
-		$file = readdir($dh);
-		while ($file) {
+		while ($file = readdir($dh)) {
 			if ($file!='.' && $file!='..') {
 				$fullpath = $dir . '/' . $file;
 				if (is_dir($fullpath)) {
 					self::delDir($fullpath);
 				} else {
-					@unlink($fullpath);
+                    @unlink($fullpath);
 				}
 			}
 		}
@@ -107,10 +107,11 @@ class Common_Tool
 	 * @see www.smartwei.com 
 	 * @author Ritesh Patel  patel.ritesh.mscit@gmail.com
 	 */
-	public static function removeDir($dir) { // 提倡使用这个，不要使用上面那个，上面的那个是垃圾
+	public static function removeDir($dir) { // 提倡使用这个，不要使用上面那个，上面的那个是垃圾。后面修改了，都可以用
 		if (!is_dir($dir)) {
 			return false;
 		}
+		$dir = realpath($dir);
 		$d = dir($dir);
 		while (false !== ($entry = $d->read())) {
 			if ($entry=='.' || $entry=='..') continue;
@@ -126,8 +127,7 @@ class Common_Tool
 			}
 		}
 		$d->close();
-		@rmdir($dir);
-		return true;
+		return @rmdir($dir);
 	}
 
 	/**
