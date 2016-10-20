@@ -862,6 +862,19 @@ class Common_Tool
         }
         return $default;
     }
+    
+    /**
+     * 获取浏览器语言
+     * @param string $default 默认返回英文语言：en
+     * @return string 返回浏览器语言国际编码；如：en、zh
+     */
+    public static function getBrowserLanguage($default = 'en') {
+        if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
+            return substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+        } else {
+            return $default;
+        }
+    } 
 
     /**
      * 将一个字符串写入文件
