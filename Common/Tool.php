@@ -845,7 +845,7 @@ class Common_Tool
 
     /**
      * 获取浏览器语言
-     * @param array $availableLanguages 您网站支持的语言；如：array('cn', 'en', 'zh-cn', 'zh')
+     * @param array $availableLanguages 您网站支持的语言；如：array('cn', 'en', 'zh-cn', 'zh', 'de', 'es')
      * @param string $default 默认语言
      * @return string
      */

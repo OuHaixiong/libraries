@@ -55,7 +55,7 @@ class Common_HttpClient
         if ($userAgent) {
             curl_setopt($ch, CURLOPT_USERAGENT, $userAgent);
         }
-        if (!empty($cookie)) { // 请求cookie值
+        if ((is_array($cookie)) && (!empty($cookie))) { // 请求cookie值
             $cookieData = array();
             foreach ($cookie as $k=>$v) {
                 $cookieData[] = $k . '=' . $v;
