@@ -40,7 +40,7 @@ class Common_HttpClient
             }
         }
         $ch = curl_init($url); // curl_setopt ( $ch, CURLOPT_URL, $url );
-        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_HEADER, 0); // 不返回header部分
         curl_setopt($ch, CURLOPT_AUTOREFERER, true); // 当根据Location:重定向时，自动设置header中的Referer:信息
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); // 将curl_exec()获取的信息以文件流的形式返回，而不是直接输出。
         curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);

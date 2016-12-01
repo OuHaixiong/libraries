@@ -1020,5 +1020,25 @@ class Common_Tool
         $base64Data = base64_encode($contents);
         return "data:$mime;base64,$base64Data";
     }
+    
+    /**
+     * 通过curl获取cookie并保存进文件，（只能获取服务器返回的cookie，并不能获取js设置的cookie）
+     * @param string $url 
+     * @param string $savePath
+     */
+    public static function getCookie($url, $savePath) {
+        if (!extension_loaded('curl')) {
+            die('curl is not load!');
+        }
+
+//         file_put_contents($savePath, '');
+        $ch = curl_init($url); // curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); // 返回获取的输出文本流(返回字符串，而非直接输出)
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 45);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+        curl_setopt($ch, CURLOPT_COOKIEJAR, $savePath); // 存储cookies到文件[后面可以通过curl_setopt($ch, CURLOPT_COOKIEFILE, $cookie_file);发送cookie]
+        $contents = curl_exec($ch); // 执行curl并赋值给$content
+        curl_close($ch); // 关闭curl
+    }
 
 }
