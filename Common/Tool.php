@@ -648,6 +648,7 @@ class Common_Tool
 //		$pattern = '/^\w+(\.\w+)*\@\w+(\.\w+)*(\.[a-zA-Z]{2,4})?\.[a-zA-Z]{2,6}$/';
 	    // 网易的标准：6~18个字符，可使用字母、数字、下划线，需以字母开头
 		$pattern = '/^[\w-]+(\.[\w-]+)*@\w+[\w-]*(\.[\w-]+)*(\.[a-zA-Z]{2,4})?\.[a-zA-Z]{2,6}$/'; // 标准格式。 有点像 zend 的验证. 貌似zend还可以+、=等
+		// php内置函数checkdnsrr()可以用来检测域名是否真实存在
 		return preg_match($pattern, $string);
 	}
 	

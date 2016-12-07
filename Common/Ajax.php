@@ -28,6 +28,7 @@ class Common_Ajax
 	 * @return string | object  string JSON encoded object
 	 */
 	public static function output($message = null, $status = 1, $data = null, $type = 'json', $callback = '') {
+        header('Content-Type: application/json', true);
 	    $response = array();
 		$response['status'] = $status;
 		if ($message !== null) {
