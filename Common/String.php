@@ -417,6 +417,16 @@ class Common_String
      * @return string
      */
     static public function reversal($str) {
+        
+        $len=strlen($str);
+        $newstr = '';
+        for($i=$len;$i>=0;$i--)
+        {
+            $newstr .= $str{$i};
+        }
+        return $newstr;
+        
+        
         $len = mb_strlen($str, self::$_encoding);
         $temp = '';
         for($i=$len-1; $i>=0; $i--) {
