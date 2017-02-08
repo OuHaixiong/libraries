@@ -413,7 +413,7 @@ class Common_String
 
     /**
      * 翻转/反转字符串
-     * @param string $str
+     * @param string $str 输入的字符串（可以中英文混合）
      * @return string
      */
     static public function reversal($str) {
