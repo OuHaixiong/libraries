@@ -1041,5 +1041,21 @@ class Common_Tool
         $contents = curl_exec($ch); // 执行curl并赋值给$content
         curl_close($ch); // 关闭curl
     }
+    
+    /**
+     * 简单异或加密和解密
+     * （仅用于不需要太安全且简单的加密方式，计算成本小）
+     * @param string $data 需要加密的字符串或需要解密的字符串
+     * @param string $key 密钥
+     * @return string 加密或解密后的字符串
+     */
+    public static function xorcrypt($data, $key){
+        $key_len = strlen($key);
+        $data_len = strlen($data);
+        for($i=0;$i<$data_len;$i++){
+            $data[$i] = $data[$i]^$key[$i%$key_len];
+        }
+        return $data;
+    }
 
 }
