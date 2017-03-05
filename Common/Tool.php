@@ -1057,5 +1057,34 @@ class Common_Tool
         }
         return $data;
     }
+    
+    /**
+     * 获取目录下面的所有文件和文件夹(此函数还需要进一步的封装，且需要验证一行代码)
+     * @param string $directoryPath 目录的绝对路径
+     * @return array 返回所有的文件和文件夹名
+     */
+    public static function getAllFilesForDirectory($directoryPath) {
+        $allFiles = array();
+        if (!dir($directoryPath)) {
+            return array();
+        }
+        $directoryHandle = opendir($directoryPath);//var_dump($directoryHandle);exit;
+        while ($item = readdir($directoryHandle)) {
+            if ($item == '.' || $item == '..') {
+                continue;
+            }
+            //var_dump($item);// TODO 为什么会有NULL
+            if ($item == NULL) {
+                continue;
+            }
+            $itemPath = $directoryPath . '/' . $item;
+            if (is_dir($itemPath)) {
+                $allFiles[] = getAllFileForDirectory($itemPath);
+            } else {
+                $allFiles[] = $item;
+            }
+        }
+        return $allFiles;
+    }
 
 }
