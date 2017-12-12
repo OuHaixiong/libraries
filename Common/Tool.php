@@ -894,11 +894,15 @@ class Common_Tool
                 return false;
             }
         }
-
-        // 已经存在，判断是否可写
-        if (is_file($filePath)) {
+        
+        if (is_file($filePath)) { // 已经存在，判断是否可写
             if (!is_writable($filePath)) {
                 self::setError('文件：' . $filePath . '已存在且不可写');
+                return false;
+            }
+        } else { // 不存在判断目录是否可写
+            if (!is_writable($dirname)) {
+                self::setError('目录：' . $dirname . '没有写的权限');
                 return false;
             }
         }
