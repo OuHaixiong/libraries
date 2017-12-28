@@ -1091,5 +1091,29 @@ class Common_Tool
         }
         return $allFiles;
     }
+	
+    /**
+     * 通过大于65的数字，获取Excel的列名（A的ASCII值为65，Z->90）
+     * @param integer $number 取值从65-766->ZZ
+     * @return string 最多两列的列名，如：A，AB，ZC
+     */
+    public static function getExcelColumnName($number) {
+        $thresholdValue = 65;
+        if (($number < $thresholdValue) || ($number > 766)) {
+            die('param is error');
+        }
+        $chrNumber = ($number%26) + 52;
+        if ($chrNumber < $thresholdValue) {
+            $chrNumber += 26;
+        }
+        $seconedString = chr($chrNumber);
+        $firstString = '';
+        if ($number > 90) {
+            $quotient = floor(($number+13)/26);
+            $chrNumber = 61+$quotient;
+            $firstString = chr($chrNumber);
+        }
+        return $firstString . $seconedString;
+    }
 
 }
