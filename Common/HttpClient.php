@@ -11,7 +11,7 @@ class Common_HttpClient
 {
 
     /**
-     * 通过curl发送HTTP请求
+     * 通过curl发送HTTP请求 (已在生产中使用，OK)
      *
      * @param string $url 请求地址
      * @param mixed $data 发送数据. 可以是数组(键值对)，也可以是字符串(通过url编码过的)
@@ -39,7 +39,7 @@ class Common_HttpClient
                     $url .= (strpos($url, '?') === false ? '?' : '') . http_build_query($data);
                 }
             }
-        }//var_dump($url);exit;
+        }
         $ch = curl_init($url); // curl_setopt($ch, CURLOPT_URL, $url); // 设置请求（抓取）url
         curl_setopt($ch, CURLOPT_HEADER, 0); // 不返回header部分（设置头文件的信息作为数据流输出）
         curl_setopt($ch, CURLOPT_AUTOREFERER, true); // 当根据Location:重定向时，自动设置header中的Referer:信息
@@ -108,8 +108,16 @@ class Common_HttpClient
             curl_setopt($ch, CURLOPT_PROXY, $proxy);
         }
         $response = curl_exec($ch); // 执行命令（请求）
-        //         $info = curl_getinfo($ch);
-        // var_dump($response);var_dump(curl_error($ch));var_dump($info);exit;
+        $info = curl_getinfo($ch);
+        //         var_dump($response);var_dump(curl_error($ch));var_dump($info);exit;
+        //        TODO 如果返回码不是200，写异常日记
+    
+        //         $nowTime = date('Y-m-d H:i:s');
+        //         $logFilePath = LOGS_PATH . '/http_response_err.log';
+        //         Tool::writeFileFromString($logFilePath, $nowTime . ' 调用http请求，错误日记是：', true);
+        //         $string = Tool::printVariable($info);
+        //         Tool::writeFileFromString($logFilePath, $string, true);
+    
         curl_close($ch); // 关闭请求
         return $response;
     }
