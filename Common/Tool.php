@@ -1115,5 +1115,16 @@ class Common_Tool
         }
         return $firstString . $seconedString;
     }
+    
+    /**
+     * 转换编码
+     * @param string $string 需转换的字符串
+     * @param string $inputCharset 输入字符集，如：GB2312，gbk
+     * @param string $outputCharset 输出字符集，如：UTF-8//TRANSLIT, utf-8//IGNORE
+     * @return string 转换后的字符串
+     */
+    public static function convertCode($string, $inputCharset = 'GBK', $outputCharset = 'UTF-8//IGNORE') {
+        return iconv($inputCharset, $outputCharset, $string);
+    }
 
 }
