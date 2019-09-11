@@ -57,7 +57,7 @@ class Common_Ajax
 	        return true;
 	    } else if (isset($_SERVER['HTTP_USER_AGENT']) && (stripos($_SERVER['HTTP_USER_AGENT'],'Shockwave')!==false)) {
 	        return true;
-	    } else if ((stripos($_SERVER['HTTP_USER_AGENT'],'Flash')!==false)) {
+	    } else if (isset($_SERVER['HTTP_USER_AGENT']) && (stripos($_SERVER['HTTP_USER_AGENT'],'Flash')!==false)) {
             return true;
 	    } else {
 	        return false;

@@ -663,12 +663,13 @@ class Common_Imagick extends Common_Image_Abstract
      *         string 'pink'
      *         string '#FFF'
      *         object new ImagickPixel('red');
+     *                new imagickpixel('none'); 貌似代表透明
      * @return boolean
      */
     public function thumbnailAndStuffColour($width, $height, $color = 'white') {
         $this->thumbnail($width, $height, true); // 等比例缩放
         $im = new Imagick (); // Instanciate and read the image in
-        $im->newimage ( $width, $height, $color, 'png' ); // 按照缩略图大小创建一个有颜色的图片 .  pink : 粉红， red：红色，gray：灰色
+        $im->newimage ( $width, $height, $color, 'png' ); // 按照缩略图大小创建一个有颜色的图片 .  pink : 粉红， red：红色，gray[grey]：灰色
         //$im->newimage ( $width, $height, $color, 'jpg' ); // 这里的$color可以等于rgba('255(红)','255(绿)','255(蓝)','透明度(0完全透明-127不透明)')
         // 实践证明，无法新建一个半透明背景的图片，只能为0时，全透明，为正数时，不透明
         $geometry = $this->_im->getImageGeometry (); // 取得缩略图的实际大小
@@ -995,6 +996,7 @@ class Common_Imagick extends Common_Image_Abstract
      */
     public function __destruct() {
         if ($this->_im instanceof Imagick) {
+            $this->_im->clear();
             $this->_im->destroy();
         }
     }

@@ -13,7 +13,7 @@ class Taxis
 	 * 冒泡、起泡排序  
 	 * 冒泡排序的基本思想是：两两比较待排序记录的关键字，发现两个记录的次序相反时即进行交换，直到没有反序的记录为止。
 	 * @param array $date 要排序的数组 (一维数组)
-	 * @param integer $num  1或0 1代表从大到小，0代表升序
+	 * @param integer $num  1或0; 1:代表从大到小(降序)，0:代表升序(从小到大)
 	 * @return array 排好序的数组
 	 */
 	public static function bubbleSort(array $array, $num = 0) {

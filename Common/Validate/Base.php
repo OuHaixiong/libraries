@@ -58,20 +58,9 @@ class Common_Validate_Base
 	 * @return string | false 如果成功返回该email，如果失败返回false
 	 */
 	public static function isEmail($value) {
-	    return filter_var($value, FILTER_VALIDATE_EMAIL);
+	    return filter_var($value, FILTER_VALIDATE_EMAIL); // php自带验证邮箱的函数，对下划线(_)不支持
 	}
-	
-	/**
-	 * 验证两个值是否相同
-	 * @param mixed $value1
-	 * @param mixed $value2
-	 * @param boolean $flag 默认false: 不检测类型; true: 检测类型（绝对相等）
-	 * @return boolean
-	 */
-	public static function isSame($value1, $value2, $flag = false) {
-	    return $flag? $value1 === $value2 : $value1 == $value2;
-	}
-	
+
 	/**
 	 * 验证QQ号
 	 * @param string $subject
@@ -88,7 +77,7 @@ class Common_Validate_Base
 	 * @return boolean
 	 */
 	public static function isMobile($string) {
-	    $regExp = '/^(?:13|15|18)[0-9]{9}$/';
+	    $regExp = '/^(?:13|15|18|17)[0-9]{9}$/';
 	    return preg_match($regExp, $string) ? true : false;
 	}
 	
@@ -141,6 +130,7 @@ class Common_Validate_Base
 	
 	/**
 	 * 验证是否是数字或数字字符串
+	 * 如：'11e5' 也会返回true
 	 * @param string | integer  $string
 	 * @return boolean
 	 */
